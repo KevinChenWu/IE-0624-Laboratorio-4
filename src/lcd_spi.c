@@ -28,7 +28,7 @@
 #include "console.h"
 #include "clock.h"
 #include "sdram.h"
-#include "lcd-spi.h"
+#include "lcd_spi.h"
 
 
 /* forward prototypes for some helper functions */
@@ -40,9 +40,6 @@ static int print_hex(int v);
  */
 uint16_t *cur_frame;
 uint16_t *display_frame;
-
-
-
 
 /*
  * Drawing a pixel consists of storing a 16 bit value in the
