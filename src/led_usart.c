@@ -21,13 +21,11 @@
 
 #include <libopencm3/stm32/rcc.h>
 #include <libopencm3/stm32/gpio.h>
-
 #include "led_usart.h"
 
 void led_usart_setup(void) {
 	rcc_periph_clock_enable(RCC_GPIOG);
-	gpio_mode_setup(GPIOG, GPIO_MODE_OUTPUT,
-			GPIO_PUPD_NONE, GPIO13);
+	gpio_mode_setup(GPIOG, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, GPIO13);
 	rcc_periph_clock_enable(RCC_GPIOA);
 	gpio_mode_setup(GPIOA, GPIO_MODE_INPUT, GPIO_PUPD_NONE, GPIO0);
 }

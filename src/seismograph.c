@@ -33,8 +33,8 @@ int main(void) {
 		x = gyr_readX();
 		y = gyr_readY();
 		z = gyr_readZ();
-		voltage = read_adc_naiive(1);
-		battery = (voltage * 5.5/1023);
+		voltage = read_adc_naiive(3);
+		battery = (voltage * 9.0/4095);
 		if (gpio_get(GPIOA, GPIO0)) {
 			if (usart_switch) {
 				usart_switch = 0;
@@ -77,6 +77,5 @@ int main(void) {
 			console_puts("\n");
 			gpio_toggle(GPIOG, GPIO13);
 		}
-		//x++, y--, z++;
 	}
 }

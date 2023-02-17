@@ -77,8 +77,7 @@ struct tft_command {
 
 
 /* prototype for lcd_command */
-static void lcd_command(uint8_t cmd, int delay, int n_args,
-						const uint8_t *args);
+static void lcd_command(uint8_t cmd, int delay, int n_args, const uint8_t *args);
 
 /*
  * void lcd_command(cmd, delay, args, arg_ptr)

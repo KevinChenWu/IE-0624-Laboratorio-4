@@ -31,10 +31,8 @@ static struct {
 	{GPIOB, GPIO5 | GPIO6 },
 	{GPIOC, GPIO0 },
 	{GPIOD, GPIO0 | GPIO1 | GPIO8 | GPIO9 | GPIO10 | GPIO14 | GPIO15},
-	{GPIOE, GPIO0 | GPIO1 | GPIO7 | GPIO8 | GPIO9 | GPIO10 |
-			GPIO11 | GPIO12 | GPIO13 | GPIO14 | GPIO15 },
-	{GPIOF, GPIO0 | GPIO1 | GPIO2 | GPIO3 | GPIO4 | GPIO5 | GPIO11 |
-			GPIO12 | GPIO13 | GPIO14 | GPIO15 },
+	{GPIOE, GPIO0 | GPIO1 | GPIO7 | GPIO8 | GPIO9 | GPIO10 | GPIO11 | GPIO12 | GPIO13 | GPIO14 | GPIO15 },
+	{GPIOF, GPIO0 | GPIO1 | GPIO2 | GPIO3 | GPIO4 | GPIO5 | GPIO11 | GPIO12 | GPIO13 | GPIO14 | GPIO15 },
 	{GPIOG, GPIO0 | GPIO1 | GPIO4 | GPIO5 | GPIO8 | GPIO15}
 };
 
@@ -62,10 +60,8 @@ void sdram_init(void) {
 	rcc_periph_clock_enable(RCC_GPIOG);
 
 	for (int i = 0; i < 6; i++) {
-		gpio_mode_setup(sdram_pins[i].gpio, GPIO_MODE_AF,
-				GPIO_PUPD_NONE, sdram_pins[i].pins);
-		gpio_set_output_options(sdram_pins[i].gpio, GPIO_OTYPE_PP,
-					GPIO_OSPEED_50MHZ, sdram_pins[i].pins);
+		gpio_mode_setup(sdram_pins[i].gpio, GPIO_MODE_AF, GPIO_PUPD_NONE, sdram_pins[i].pins);
+		gpio_set_output_options(sdram_pins[i].gpio, GPIO_OTYPE_PP, GPIO_OSPEED_50MHZ, sdram_pins[i].pins);
 		gpio_set_af(sdram_pins[i].gpio, GPIO_AF12, sdram_pins[i].pins);
 	}
 

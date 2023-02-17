@@ -121,7 +121,7 @@ char console_getc(int wait) {
  * after the last character, as indicated by a NUL character, is
  * reached.
  */
-void console_puts(char *s) {
+void console_puts(char* s) {
 	while (*s != '\000') {
 		console_putc(*s);
 		/* Add in a carraige return, after sending line feed */
@@ -139,7 +139,7 @@ void console_puts(char *s) {
  * support for editing characters (back space and delete)
  * end when a <CR> character is received.
  */
-int console_gets(char *s, int len) {
+int console_gets(char* s, int len) {
 	char *t = s;
 	char c;
 

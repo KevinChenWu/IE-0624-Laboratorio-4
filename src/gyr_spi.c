@@ -24,7 +24,6 @@
 #include <libopencm3/stm32/spi.h>
 #include <libopencm3/stm32/gpio.h>
 #include <libopencm3/stm32/usart.h>
-
 #include "gyr_spi.h"
 
 static void spi_setup(void);
@@ -42,8 +41,7 @@ static void spi_setup(void) {
 	gpio_set(GPIOC, GPIO1);
 
 	/* Setup GPIO pins for AF5 for SPI5 signals. */
-	gpio_mode_setup(GPIOF, GPIO_MODE_AF, GPIO_PUPD_NONE,
-			GPIO7 | GPIO8 | GPIO9);
+	gpio_mode_setup(GPIOF, GPIO_MODE_AF, GPIO_PUPD_NONE, GPIO7 | GPIO8 | GPIO9);
 	gpio_set_af(GPIOF, GPIO_AF5, GPIO7 | GPIO8 | GPIO9);
 
 	//spi initialization;
@@ -68,9 +66,7 @@ void gyr_setup(void) {
 	gpio_clear(GPIOC, GPIO1);
 	spi_send(SPI5, GYR_CTRL_REG1);
 	spi_read(SPI5);
-	spi_send(SPI5, GYR_CTRL_REG1_PD | GYR_CTRL_REG1_XEN |
-			GYR_CTRL_REG1_YEN | GYR_CTRL_REG1_ZEN |
-			(3 << GYR_CTRL_REG1_BW_SHIFT));
+	spi_send(SPI5, GYR_CTRL_REG1_PD | GYR_CTRL_REG1_XEN | GYR_CTRL_REG1_YEN | GYR_CTRL_REG1_ZEN | (3 << GYR_CTRL_REG1_BW_SHIFT));
 	spi_read(SPI5);
 	gpio_set(GPIOC, GPIO1);
 
@@ -98,7 +94,7 @@ int16_t gyr_readX(void) {
 	spi_send(SPI5, 0);
 	gyr_x |= spi_read(SPI5) << 8;
 	gpio_set(GPIOC, GPIO1);
-	return (gyr_x*SENSITIVITY_2000DPS + 33);
+	return gyr_x*SENSITIVITY_2000DPS;
 }
 
 int16_t gyr_readY(void) {
@@ -116,7 +112,7 @@ int16_t gyr_readY(void) {
 	spi_send(SPI5, 0);
 	gyr_y |= spi_read(SPI5) << 8;
 	gpio_set(GPIOC, GPIO1);
-	return (gyr_y*SENSITIVITY_2000DPS + 2);
+	return gyr_y*SENSITIVITY_2000DPS;
 }
 
 int16_t gyr_readZ(void) {

@@ -69,9 +69,7 @@ void gfx_init(void (*pixel_func)(int, int, uint16_t), int width, int height) {
 }
 
 /* Bresenham's algorithm - wikpedia */
-void gfx_drawLine(int16_t x0, int16_t y0,
-			    int16_t x1, int16_t y1,
-			    uint16_t color) {
+void gfx_drawLine(int16_t x0, int16_t y0, int16_t x1, int16_t y1, uint16_t color) {
 	int16_t steep = abs(y1 - y0) > abs(x1 - x0);
 	if (steep) {
 		swap(x0, y0);
@@ -110,20 +108,17 @@ void gfx_drawLine(int16_t x0, int16_t y0,
 	}
 }
 
-void gfx_drawFastVLine(int16_t x, int16_t y,
-		       int16_t h, uint16_t color) {
+void gfx_drawFastVLine(int16_t x, int16_t y, int16_t h, uint16_t color) {
 	/* Update in subclasses if desired! */
 	gfx_drawLine(x, y, x, y + h - 1, color);
 }
 
-void gfx_drawFastHLine(int16_t x, int16_t y,
-		       int16_t w, uint16_t color) {
+void gfx_drawFastHLine(int16_t x, int16_t y, int16_t w, uint16_t color) {
 	/* Update in subclasses if desired! */
 	gfx_drawLine(x, y, x + w - 1, y, color);
 }
 
-void gfx_fillRect(int16_t x, int16_t y, int16_t w, int16_t h,
-		  uint16_t color) {
+void gfx_fillRect(int16_t x, int16_t y, int16_t w, int16_t h, uint16_t color) {
 	/* Update in subclasses if desired! */
 	int16_t i;
 	for (i = x; i < x + w; i++) {
@@ -163,8 +158,7 @@ void gfx_puts(char *s) {
 }
 
 /* Draw a character */
-void gfx_drawChar(int16_t x, int16_t y, unsigned char c,
-		  uint16_t color, uint16_t bg, uint8_t size) {
+void gfx_drawChar(int16_t x, int16_t y, unsigned char c, uint16_t color, uint16_t bg, uint8_t size) {
 	int8_t i, j, line;
 	int8_t descender;
 	unsigned const char *glyph;

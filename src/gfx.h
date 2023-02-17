@@ -5,15 +5,13 @@
 #define swap(a, b) { int16_t t = a; a = b; b = t; }
 
 void gfx_drawPixel(int x, int y, uint16_t color);
-void gfx_drawLine(int16_t x0, int16_t y0, int16_t x1, int16_t y1,
-		  uint16_t color);
+void gfx_drawLine(int16_t x0, int16_t y0, int16_t x1, int16_t y1, uint16_t color);
 void gfx_drawFastVLine(int16_t x, int16_t y, int16_t h, uint16_t color);
 void gfx_drawFastHLine(int16_t x, int16_t y, int16_t w, uint16_t color);
 void gfx_fillRect(int16_t x, int16_t y, int16_t w, int16_t h, uint16_t color);
 void gfx_fillScreen(uint16_t color);
 void gfx_init(void (*draw)(int, int, uint16_t), int, int);
-void gfx_drawChar(int16_t x, int16_t y, unsigned char c, uint16_t color,
-		  uint16_t bg, uint8_t size);
+void gfx_drawChar(int16_t x, int16_t y, unsigned char c, uint16_t color, uint16_t bg, uint8_t size);
 void gfx_setCursor(int16_t x, int16_t y);
 void gfx_setTextColor(uint16_t c, uint16_t bg);
 void gfx_setTextSize(uint8_t s);
