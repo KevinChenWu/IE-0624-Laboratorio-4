@@ -27,6 +27,8 @@ void adc_setup(void) {
 	rcc_periph_clock_enable(RCC_ADC1);
 	gpio_mode_setup(GPIOA, GPIO_MODE_ANALOG, GPIO_PUPD_NONE, GPIO1);
 	gpio_mode_setup(GPIOA, GPIO_MODE_ANALOG, GPIO_PUPD_NONE, GPIO3);
+	rcc_periph_clock_enable(RCC_GPIOG);
+	gpio_mode_setup(GPIOG, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, GPIO14);
 
 	adc_power_off(ADC1);
 	adc_disable_scan_mode(ADC1);

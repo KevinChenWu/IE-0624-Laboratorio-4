@@ -35,6 +35,11 @@ int main(void) {
 		z = gyr_readZ();
 		voltage = read_adc_naiive(3);
 		battery = (voltage * 9.0/4095);
+		if (battery <= 7.0) {
+			gpio_toggle(GPIOG, GPIO14);
+		} else {
+			gpio_clear(GPIOG, GPIO14);
+		}
 		if (gpio_get(GPIOA, GPIO0)) {
 			if (usart_switch) {
 				usart_switch = 0;
@@ -70,10 +75,12 @@ int main(void) {
 		lcd_show_frame();
 		if (usart_switch) {
 			console_puts(X);
-			console_puts("\t");
+			console_puts(",");
 			console_puts(Y);
-			console_puts("\t");
+			console_puts(",");
 			console_puts(Z);
+			console_puts(",");
+			console_puts(Battery);
 			console_puts("\n");
 			gpio_toggle(GPIOG, GPIO13);
 		}
