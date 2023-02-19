@@ -322,15 +322,12 @@ void lcd_spi_init(void) {
 	spi_enable(LCD_SPI);
 
 	/* Set up the display */
-	console_puts("Initialize the display.\n");
 	initialize_display(initialization);
 
 	/* create a test image */
-	console_puts("Generating Test Image\n");
 	test_image();
 
 	/* display it on the LCD */
-	console_puts("And ... voila\n");
 	lcd_show_frame();
 }
 

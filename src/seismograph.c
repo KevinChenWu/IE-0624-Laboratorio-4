@@ -1,6 +1,7 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <math.h>
+#include <string.h>
 #include <libopencm3/stm32/gpio.h>
 #include "clock.h"
 #include "console.h"
@@ -15,15 +16,14 @@ int main(void) {
 	int16_t x = 0, y = 0, z = 0, usart_switch = 0;
 	uint16_t voltage;
 	float battery;
-	char X[8], Y[8], Z[8], Battery[8];
+	char X[8], Y[8], Z[8], Battery[8], msg[35], comma[] = ",";
 	clock_setup();
-	console_setup(9600);
+	console_setup(115200);
 	sdram_init();
 	gyr_setup();
 	adc_setup();
 	lcd_spi_init();
 	led_usart_setup();
-	console_puts("LCD Initialized\n");
 	gfx_init(lcd_draw_pixel, 240, 320);
 	while (1) {
 		gfx_fillScreen(LCD_WHITE);
@@ -48,9 +48,9 @@ int main(void) {
 				usart_switch = 1;
 			}
 		}
-		sprintf(X, "% d", x);
-		sprintf(Y, "% d", y);
-		sprintf(Z, "% d", z);
+		sprintf(X, "%d", x);
+		sprintf(Y, "%d", y);
+		sprintf(Z, "%d", z);
 		sprintf(Battery, "%.2f", battery);
 		gfx_setCursor(50, 75);
 		gfx_puts("X: ");
@@ -74,14 +74,16 @@ int main(void) {
 		}
 		lcd_show_frame();
 		if (usart_switch) {
-			console_puts(X);
-			console_puts(",");
-			console_puts(Y);
-			console_puts(",");
-			console_puts(Z);
-			console_puts(",");
-			console_puts(Battery);
+			strcat(msg, X);
+			strcat(msg, comma);
+			strcat(msg, Y);
+			strcat(msg, comma);
+			strcat(msg, Z);
+			strcat(msg, comma);
+			strcat(msg, Battery);
+			console_puts(msg);
 			console_puts("\n");
+			memset(msg, 0, 35);
 			gpio_toggle(GPIOG, GPIO13);
 		}
 	}
