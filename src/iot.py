@@ -2,7 +2,6 @@
 
 import serial
 import paho.mqtt.client as mqtt
-import time
 import json
 
 def on_connect(client, userdata, flag, rc):
@@ -38,7 +37,7 @@ while True:
 	line = ser.readline().decode("utf-8")
 	line = line.replace("\r", "").replace("\n", "")
 	line = line.split(",")
-	if len(line) > 1:
+	if len(line) == 4:
 		dictionary["X"] = line[0]
 		dictionary["Y"] = line[1]
 		dictionary["Z"] = line[2]
